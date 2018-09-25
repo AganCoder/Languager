@@ -35,9 +35,7 @@ open class Languager {
     
     open var defaultLanguage: String = "en"
     
-    public init() {
-        print("Hello0 worl")
-    }
+    public init() {}
     
     public var systemPreferredLanguage: String {
         guard let current = NSLocale.current.languageCode else { return "" }
