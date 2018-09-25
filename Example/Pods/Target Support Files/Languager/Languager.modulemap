@@ -1,0 +1,6 @@
+framework module Languager {
+  umbrella header "Languager-umbrella.h"
+
+  export *
+  module * { export * }
+}

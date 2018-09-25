@@ -1,0 +1,16 @@
+PODS:
+  - Languager (0.1.0)
+
+DEPENDENCIES:
+  - Languager (from `../`)
+
+EXTERNAL SOURCES:
+  Languager:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Languager: bc50fe45db7571543922f8286c1bb4aaa7613b0e
+
+PODFILE CHECKSUM: ef1f37901fec3d0f87235bace07cad65bdac66f8
+
+COCOAPODS: 1.5.3
