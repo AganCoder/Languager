@@ -22,7 +22,7 @@ pod 'Languager'
 
 ## Author
 
-gaoxiang, gaoxiang@ezbuy.com
+rsenjoyer: rsenjoyer@gmail.com
 
 ## License
 
