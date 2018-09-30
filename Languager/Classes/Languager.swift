@@ -29,7 +29,7 @@ open class Languager {
     
     public static let shared = Languager()
     
-    internal var currentBundle:Bundle?
+    public var currentBundle:Bundle?
     
     public var adapter: LanguageAdapter?
     
