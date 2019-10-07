@@ -95,7 +95,7 @@ open class Languager {
     }
     
     
-    public func availableLanguages(_ excludeBase: Bool = false) -> [String] {
+    public func availableLanguages(excludeBase: Bool = false) -> [String] {
         var availableLanguages = Bundle.main.localizations
         
         if let indexOfBase = availableLanguages.index(of: "Base") , excludeBase == true {
@@ -108,7 +108,7 @@ open class Languager {
         return availableLanguages
     }
     
-    public func displayNameForLanguage(_ language: String) -> String {
+    public func displayName(forLanguage language: String) -> String {
         let locale : NSLocale = NSLocale(localeIdentifier: language)
         
         guard let displayName = locale.displayName(forKey: NSLocale.Key.identifier, value: language) else {
@@ -120,5 +120,4 @@ open class Languager {
         }
         return displayName
     }
-    
 }

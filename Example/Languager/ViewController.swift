@@ -24,10 +24,10 @@ class ViewController: UIViewController {
     @IBAction func languageBtnDidTapped(_ sender: Any) {
         let alter = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let languages = Languager.shared.availableLanguages(true)
+        let languages = Languager.shared.availableLanguages(excludeBase: true)
         
         languages.forEach { (lan) in
-            let action = UIAlertAction(title: Languager.shared.displayNameForLanguage(lan), style: UIAlertActionStyle.default, handler: { (action) in
+            let action = UIAlertAction(title: Languager.shared.displayName(forLanguage: lan), style: UIAlertActionStyle.default, handler: { (action) in
                 Languager.shared.currentLanguage = lan
                 print(lan)
             })
