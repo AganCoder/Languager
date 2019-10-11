@@ -1,0 +1,13 @@
+/* 
+  Common.strings
+  Languager
+
+  Created by rsenjoyer on 2019/10/7.
+  Copyright © 2019 CocoaPods. All rights reserved.
+*/
+
+"Click Me" = "点我一下";
+
+"Cancel" = "取消";
+
+"Language" = "语言";

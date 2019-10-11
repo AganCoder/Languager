@@ -2,56 +2,32 @@
 //  Languager.swift
 //  Languager
 //
-//  Created by Enjoy on 2018/9/25.
+//  Created by rsenjoyer on 2018/9/25.
 //
 
 import UIKit
-
-public protocol LanguageAdapter {
-    
-    func availableLanguages(_ languages: [String]) -> [String]
-    
-    func adapt(_ language: String, default displayName: String) -> String?
-}
-
-extension LanguageAdapter {
-    
-    public func availableLanguages(_ languages: [String]) -> [String] {
-        return languages
-    }
-    
-    public func adapt(_ language: String, default displayName: String) -> String? {
-        return displayName
-    }
-}
 
 open class Languager {
     
     public static let shared = Languager()
     
-    public var currentBundle:Bundle?
+    public var currentBundle: Bundle?
     
     public var adapter: LanguageAdapter?
     
-    open var defaultLanguage: String = "en"
+    private init() {}
     
-    public init() {}
-    
-    public var systemPreferredLanguage: String {
-        guard let current = NSLocale.current.languageCode else { return "" }
-        
-        if !self.availableLanguages().contains(current) {
-            return ""
-        }
+    private var systemPreferredLanguage: String? {
+        guard let current = NSLocale.current.languageCode, !self.availableLanguages().contains(current) else { return nil }
         return current
     }
     
-    private var userSettingLanguage: String {
+    private var userSettingLanguage: String? {
         get {
-            guard let langauge =  UserDefaults.language.string(for: .userSettingLanguage) else {
-                return ""
+            guard let language = UserDefaults.language.string(for: .userSettingLanguage) else {
+                return nil
             }
-            return langauge
+            return language
         }
         set {
             UserDefaults.language.set(newValue, for: .userSettingLanguage)
@@ -66,45 +42,63 @@ open class Languager {
             return _currentLanguage
         }
         set {
-            guard newValue != _currentLanguage else { return }
+            guard newValue != _currentLanguage, self.availableLanguages().contains(newValue) else {
+                return
+            }
             
-            guard let path = Bundle.main.path(forResource: newValue, ofType: "lproj"), let bundle = Bundle(path:path) else { return }
+            guard let path = Bundle.main.path(forResource: newValue, ofType: "lproj"), let bundle = Bundle(path: path) else {
+                return
+            }
             
             _currentLanguage = newValue
             userSettingLanguage = newValue
             currentBundle = bundle
-            Bundle.main.onLanguage()
             NotificationCenter.default.post(name: NSNotification.Name.Langauge.DidChange, object: newValue)
         }
     }
     
-    public func initialize() {
-        
-        if userSettingLanguage.isEmpty == false {
+    public func set(adapter: LanguageAdapter) {
+        self.adapter = adapter
+    }
+    
+    @discardableResult
+    public func initialize() -> Languager {
+        if currentLanguage.isEmpty, let userSettingLanguage = userSettingLanguage {
             currentLanguage = userSettingLanguage
-        } else if systemPreferredLanguage.isEmpty == false {
-            currentLanguage = systemPreferredLanguage
-        } else {
-            currentLanguage = self.defaultLanguage
         }
+        print("1111")
+        if currentLanguage.isEmpty, let systemPreferredLanguage = systemPreferredLanguage {
+            currentLanguage = systemPreferredLanguage
+        }
+        print("1111")
+        if currentLanguage.isEmpty, let defaultLanguage = self.adapter?.defaultLanguage {
+            currentLanguage = defaultLanguage
+        }
+        
+        if currentLanguage.isEmpty, let first = self.availableLanguages(excludeBase: true).first {
+            currentLanguage = first
+        }
+        
+        if (currentLanguage.isEmpty) {
+            currentLanguage = "Base"
+        }
+        
+        Bundle.onLanguage()
+        
+        return self
     }
-    
-    public func reset() {
-        userSettingLanguage = ""
-        currentLanguage = self.defaultLanguage
-    }
-    
     
     public func availableLanguages(excludeBase: Bool = false) -> [String] {
         var availableLanguages = Bundle.main.localizations
         
-        if let indexOfBase = availableLanguages.index(of: "Base") , excludeBase == true {
+        if let indexOfBase = availableLanguages.firstIndex(of: "Base") , excludeBase == true {
             availableLanguages.remove(at: indexOfBase)
         }
         
         if let adapterLanguages = self.adapter?.availableLanguages(availableLanguages) {
             availableLanguages = adapterLanguages
         }
+        print(availableLanguages)
         return availableLanguages
     }
     
@@ -115,7 +109,7 @@ open class Languager {
             return String()
         }
         
-        if let name = self.adapter?.adapt(language, default: displayName), !name.isEmpty {
+        if let name = self.adapter?.displayName(for: language, defaultName: displayName), !name.isEmpty {
             return name
         }
         return displayName

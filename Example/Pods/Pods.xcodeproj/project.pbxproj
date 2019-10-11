@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		425459733B6680F5E742B8AA36462E28 /* Pods-Languager_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC930707A44A9B646FEE98E902A39C3 /* Pods-Languager_Example-dummy.m */; };
 		59E0F310F3AC69ADFFEB4DB0E2F25575 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
+		84455D5A2350CD8F000C0DD9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84455D592350CD8F000C0DD9 /* String+Extension.swift */; };
+		849C9739234BA09F00A3A3B5 /* LanguageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C9738234BA09F00A3A3B5 /* LanguageAdapter.swift */; };
 		9BF7A62F51993DAAA942496F63109B15 /* Languager-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A19965AC3C971BBAE9E2F7EC6D15EA8D /* Languager-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C808ED5150881C3E4F09DDE549DD487 /* Pods-Languager_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F18552352FAD4DE1203AF658292CC130 /* Pods-Languager_Tests-dummy.m */; };
 		9F3BB3DD428B5D6668742E2100170F4E /* Languager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 64ABFFC364ABB5ADDFD265797496844A /* Languager-dummy.m */; };
@@ -58,7 +60,9 @@
 		7DA5CB4E5D5BC78ED95AEAB73051FCE6 /* Languager.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Languager.modulemap; sourceTree = "<group>"; };
 		7EAD7E549F1F5B02C1CFBF4D5F03E734 /* Pods-Languager_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Languager_Example-resources.sh"; sourceTree = "<group>"; };
 		8086AB8921B426DC6C34A8BA21B2EC7A /* Pods-Languager_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Languager_Example-umbrella.h"; sourceTree = "<group>"; };
+		84455D592350CD8F000C0DD9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		8463893298B8F1357975B2020CBF389C /* Languager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Languager.swift; path = Languager/Classes/Languager.swift; sourceTree = "<group>"; };
+		849C9738234BA09F00A3A3B5 /* LanguageAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageAdapter.swift; sourceTree = "<group>"; };
 		86F6198D13FE167B6E3432BCE69A2AEA /* Pods-Languager_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Languager_Tests-umbrella.h"; sourceTree = "<group>"; };
 		87988AB53DCAE7EB47D431769C928907 /* NSBundle+Languager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSBundle+Languager.swift"; path = "Languager/Classes/NSBundle+Languager.swift"; sourceTree = "<group>"; };
 		87FFDDB79024594FE9B675AB77DA54DA /* Notification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notification.swift; path = Languager/Classes/Notification.swift; sourceTree = "<group>"; };
@@ -210,9 +214,11 @@
 			isa = PBXGroup;
 			children = (
 				8463893298B8F1357975B2020CBF389C /* Languager.swift */,
+				849C9738234BA09F00A3A3B5 /* LanguageAdapter.swift */,
 				87FFDDB79024594FE9B675AB77DA54DA /* Notification.swift */,
 				87988AB53DCAE7EB47D431769C928907 /* NSBundle+Languager.swift */,
 				0AEE22E26C4C16956CC0EB5A68544B8A /* UserDefault+Languager.swift */,
+				84455D592350CD8F000C0DD9 /* String+Extension.swift */,
 				1AAECAFDDC4F54E19D4FA47F66923B36 /* Pod */,
 				A3E185C6628519D7826F53AA819B68AE /* Support Files */,
 			);
@@ -326,14 +332,20 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1030;
+				TargetAttributes = {
+					9384A70649F913D59D18A8F3563072F4 = {
+						LastSwiftMigration = 1030;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
 			productRefGroup = 94C59C82F4477DBBA477A5705F03ED5F /* Products */;
@@ -368,6 +380,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849C9739234BA09F00A3A3B5 /* LanguageAdapter.swift in Sources */,
+				84455D5A2350CD8F000C0DD9 /* String+Extension.swift in Sources */,
 				9F3BB3DD428B5D6668742E2100170F4E /* Languager-dummy.m in Sources */,
 				C6CAEE56C1BDC10A55A60CC2BE27B041 /* Languager.swift in Sources */,
 				EFC6AA18AEB1BA3A313BA4B50F8EBCA1 /* Notification.swift in Sources */,
@@ -419,7 +433,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -581,7 +595,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -643,6 +657,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;

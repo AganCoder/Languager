@@ -13,34 +13,56 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var languageBtn: UIButton!
     
+    @IBOutlet weak var languageLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.Langauge.DidChange, object: nil, queue: .main) { (notify) in
-            self.languageBtn.setTitle("12222222", for: .normal)
+    
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.Langauge.DidChange, object: nil, queue: .main) {_ in
+            self.setupUI()
         }
     }
 
     @IBAction func languageBtnDidTapped(_ sender: Any) {
+        
         let alter = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let languages = Languager.shared.availableLanguages(excludeBase: true)
         
         languages.forEach { (lan) in
-            let action = UIAlertAction(title: Languager.shared.displayName(forLanguage: lan), style: UIAlertActionStyle.default, handler: { (action) in
+            let action = UIAlertAction(title: Languager.shared.displayName(forLanguage: lan), style: UIAlertAction.Style.default, handler: { (action) in
                 Languager.shared.currentLanguage = lan
-                print(lan)
             })
+            
             alter.addAction(action)
         }
         
-        present(alter, animated: true, completion: nil)
+        let cancel = UIAlertAction(title: "Cancel".localizable(from: "Common"), style: .cancel, handler: nil)
+        alter.addAction(cancel)
         
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        present(alter, animated: true, completion: nil)
     }
 
+    private func setupUI() {
+        self.languageLabel.text = "Language".localizable()
+        self.languageBtn.setTitle("Click Me".localizable(), for: .normal)
+    }
 }
 
+
+extension String {
+    
+    public func localizable(from table: String = "Common") -> String {
+        guard let string = Languager.shared.currentBundle?.localizedString(forKey: self, value: nil, table: table) else {
+            return self
+        }
+        return string
+    }
+}
+
+extension NSString {
+    
+    public func localizableFromTable(table: String) -> NSString {
+        return (self as String).localizable(from: table) as NSString
+    }
+}

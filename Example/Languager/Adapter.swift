@@ -2,7 +2,7 @@
 //  Adapter.swift
 //  Languager_Example
 //
-//  Created by Enjoy on 2018/9/25.
+//  Created by rsenjoyer on 2018/9/25.
 //  Copyright © 2018 CocoaPods. All rights reserved.
 //
 

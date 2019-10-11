@@ -2,7 +2,7 @@
 //  UserDefault.swift
 //  Languager
 //
-//  Created by Enjoy on 2018/9/25.
+//  Created by rsenjoyer on 2018/9/25.
 //
 
 import Foundation
@@ -19,8 +19,7 @@ protocol StringUserDefaultable: KeyNameSpaceable {
     associatedtype StringDefaultKey: RawRepresentable
 }
 
-extension StringUserDefaultable where StringDefaultKey.RawValue == String {
-    
+extension StringUserDefaultable where StringDefaultKey.RawValue == String {    
     static func set(_ value: String?, for key: StringDefaultKey) {
         let key = nameSpace(key)
         UserDefaults.standard.set(value, forKey: key)
@@ -29,8 +28,8 @@ extension StringUserDefaultable where StringDefaultKey.RawValue == String {
     
     static func string(for key: StringDefaultKey) -> String? {
         let key = nameSpace(key)
-        return UserDefaults.standard.string(forKey: key)    }
-    
+        return UserDefaults.standard.string(forKey: key)
+    }
 }
 
 
