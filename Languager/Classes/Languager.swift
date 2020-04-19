@@ -66,11 +66,11 @@ open class Languager {
         if currentLanguage.isEmpty, let userSettingLanguage = userSettingLanguage {
             currentLanguage = userSettingLanguage
         }
-        print("1111")
+        
         if currentLanguage.isEmpty, let systemPreferredLanguage = systemPreferredLanguage {
             currentLanguage = systemPreferredLanguage
         }
-        print("1111")
+        
         if currentLanguage.isEmpty, let defaultLanguage = self.adapter?.defaultLanguage {
             currentLanguage = defaultLanguage
         }
